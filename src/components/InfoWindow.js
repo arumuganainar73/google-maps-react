@@ -93,9 +93,22 @@ export class InfoWindow extends React.Component {
     this.infowindow.close();
   }
 
+  // renderChildren() {
+  //   const {children} = this.props;
+  //   return ReactDOMServer.renderToString(children);
+  // }
+
   renderChildren() {
     const {children} = this.props;
-    return ReactDOMServer.renderToString(children);
+
+    var domWrapper = document.createElement('DIV');
+    domWrapper.innerHTML = ReactDOMServer.renderToString(children);
+
+    if (this.props.renderDomCallback) {
+      domWrapper = this.props.renderDomCallback(domWrapper);
+    }
+
+    return domWrapper;
   }
 
   render() {
