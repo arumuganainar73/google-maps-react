@@ -207,12 +207,27 @@
       value: function closeWindow() {
         this.infowindow.close();
       }
+
+      // renderChildren() {
+      //   const {children} = this.props;
+      //   return ReactDOMServer.renderToString(children);
+      // }
+
     }, {
       key: 'renderChildren',
       value: function renderChildren() {
+        console.log("renderChildren");
         var children = this.props.children;
 
-        return _server2.default.renderToString(children);
+
+        var domWrapper = document.createElement('DIV');
+        domWrapper.innerHTML = _server2.default.renderToString(children);
+
+        if (this.props.renderDomCallback) {
+          domWrapper = this.props.renderDomCallback(domWrapper);
+        }
+
+        return domWrapper;
       }
     }, {
       key: 'render',
