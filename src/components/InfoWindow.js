@@ -99,6 +99,7 @@ export class InfoWindow extends React.Component {
   // }
 
   renderChildren() {
+    console.log("renderChildren");
     const {children} = this.props;
 
     var domWrapper = document.createElement('DIV');
